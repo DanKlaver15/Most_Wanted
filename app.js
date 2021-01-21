@@ -3,7 +3,6 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
-//This is just as test of Git
 
 // app is the function called to start the entire application
 function app(people){
@@ -85,7 +84,12 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Age: " + person.age + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n"; 
+  // TODO: finish getting the rest of the information to display - NOTE: we think we're done!!!!
   alert(personInfo);
 }
 
