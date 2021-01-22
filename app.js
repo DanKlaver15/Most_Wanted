@@ -41,7 +41,7 @@ function mainMenu(person, people){
       displayPerson(person);
     break;
     case "family":
-    // TODO: get person's family
+      immediateFamily(person, people); 
     break;
     case "descendants":
       displayDescendants(person, people);
@@ -136,15 +136,15 @@ function chars(input){
 }
 
 // function that checks for immediate family members - spouse/parents/siblings/children
-function immediateFamily(person){
+function immediateFamily(person, people){
   
   //Iterate over every objects' id# to see if it matches the person's parent#
 
-  function findParents(person){
+  function findParents(person, people){
     let parentID = person[0].parents; 
 
     let foundParent = people.filter(function(parentID){
-        if(people.id === parentID){
+        if(people[0] === parentID){
           return true;
         } else {
           return false;
@@ -155,11 +155,11 @@ function immediateFamily(person){
 
   //Iterate over every objects' parent# to see if it matches the person's parent#
 
-  function findSiblings(person){
+  function findSiblings(person, people){
     let siblingIdentifier = person[0].parents;
 
     let foundSibling = people.filter(function(siblingIdentifier){
-      if(people.parents === siblingIdentifier){
+      if(people[10] === siblingIdentifier){
         return true;
       } else {
         return false;
@@ -170,26 +170,27 @@ function immediateFamily(person){
 
   //Iterate over every objects' id# to see if it matches the person's currentSpouse#
 
-  function findSpouse(person){
+  function findSpouse(person, people){
     let spouseID = person[0].currentSpouse;
 
-    let foundSpouse = people.filter(function(spouseID){
-      if(people.currentSpouse === spouseID){
+    let foundSpouse = people.filter(function(people){
+      if(people[0].id === spouseID){
         return true;
       } else {
         return false;
       }
   })
+
     return foundSpouse; 
   }
 
   //Iterate over every objects' parent# to see if it matches the person's id#
 
-  function findChildren(person){
+  function findChildren(person, people){
     let childrenID = person[0].id;
 
     let foundChildren = people.filter(function(childrenID){
-      if(people.parents === childrenID){
+      if(people[10] === childrenID){
         return true;
       } else {
         return false;
@@ -200,17 +201,17 @@ function immediateFamily(person){
 
   //A function to call all the above functions
 
-  function displayImmediateFamily(){
-    let printParents = findParents();
-    let printSiblings = findSiblings();
-    let printSpouse = findSpouse();
-    let printChildren = findChildren();
+  function displayImmediateFamily(person, people){
+    let printParents = findParents(person, people);
+    let printSiblings = findSiblings(person, people);
+    let printSpouse = findSpouse(person, people);
+    let printChildren = findChildren(person, people);
 
-    alert("Parents: " + printParents + ".\n Siblings: " + printSiblings + ".\n Spouse: " + printSpouse + ".\n Childern: " + printChildren + ".\n");
+    let familyAlert = alert("Parents: " + printParents + "\nSiblings: " + printSiblings + "\nSpouse: " + printSpouse + "\nChildern: " + printChildren);
     
   }
 
   //Now call everything
 
-  let familyInformation = displayImmediateFamily();
+  let familyInformation = displayImmediateFamily(person, people);
 }
