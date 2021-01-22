@@ -131,3 +131,83 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+// function that checks for immediate family members - spouse/parents/siblings/children
+function immediateFamily(person){
+  
+  //Iterate over every objects' id# to see if it matches the person's parent#
+
+  function findParents(person){
+    let parentID = person[0].parents; 
+
+    let foundParent = people.filter(function(parentID){
+        if(people.id === parentID){
+          return true;
+        } else {
+          return false;
+        }
+    })
+      return foundParent;
+  }
+
+  //Iterate over every objects' parent# to see if it matches the person's parent#
+
+  function findSiblings(person){
+    let siblingIdentifier = person[0].parents;
+
+    let foundSibling = people.filter(function(siblingIdentifier){
+      if(people.parents === siblingIdentifier){
+        return true;
+      } else {
+        return false;
+      }
+  })
+    return foundSibling;
+  }
+
+  //Iterate over every objects' id# to see if it matches the person's currentSpouse#
+
+  function findSpouse(person){
+    let spouseID = person[0].currentSpouse;
+
+    let foundSpouse = people.filter(function(spouseID){
+      if(people.currentSpouse === spouseID){
+        return true;
+      } else {
+        return false;
+      }
+  })
+    return foundSpouse; 
+  }
+
+  //Iterate over every objects' parent# to see if it matches the person's id#
+
+  function findChildren(person){
+    let childrenID = person[0].id;
+
+    let foundChildren = people.filter(function(childrenID){
+      if(people.parents === childrenID){
+        return true;
+      } else {
+        return false;
+      }
+  })
+    return foundChildren; 
+  }
+
+  //A function to call all the above functions
+
+  function displayImmediateFamily(){
+    let printParents = findParents();
+    let printSiblings = findSiblings();
+    let printSpouse = findSpouse();
+    let printChildren = findChildren();
+
+    alert("Parents: " + printParents + ".\n Siblings: " + printSiblings + ".\n Spouse: " + printSpouse + ".\n Childern: " + printChildren + ".\n");
+    
+  }
+
+  //Now call everything
+
+  let familyInformation = displayImmediateFamily();
+}
