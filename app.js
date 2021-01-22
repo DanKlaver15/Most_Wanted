@@ -92,8 +92,6 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-/*======================================================================*/
-
 function displayDescendants(person, people) {
   let descendants = people.filter(function(list) {
     if (person[0].id === list.parents[0] || person[0].id === list.parents[1]) {
@@ -109,8 +107,6 @@ function displayDescendants(person, people) {
   }
   alert("The following are all descendants of " + person[0].firstName + " " + person[0].lastName + ":" + "\n" + listDescendants);
 }
-
-/*======================================================================*/
 
 //function to calculate age
 function calculate_age(dob) {
