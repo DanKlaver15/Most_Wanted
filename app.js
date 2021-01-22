@@ -34,12 +34,11 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
     case "info":
       displayPerson(person);
-    // TODO: get person's info - DONE
     break;
     case "family":
     // TODO: get person's family
@@ -69,8 +68,8 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
-  return foundPerson;
+  // lookup how to turn an array into an object
+  return foundPerson[0];
 }
 
 // alerts a list of people
@@ -91,7 +90,6 @@ function displayPerson(person){
   personInfo += "Age: " + age + "\n";
   personInfo += "Eye Color: " + person[0].eyeColor + "\n";
   personInfo += "Occupation: " + person[0].occupation + "\n"; 
-  // TODO: finish getting the rest of the information to display - NOTE: we think we're done!!!!
   alert(personInfo);
 }
 
