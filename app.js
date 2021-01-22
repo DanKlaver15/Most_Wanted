@@ -34,7 +34,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
     case "info":
@@ -44,7 +44,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-    // TODO: get person's descendants
+      displayDescendants(person, people);
     break;
     case "restart":
     app(people); // restart
@@ -68,8 +68,7 @@ function searchByName(people){
       return false;
     }
   })
-  // lookup how to turn an array into an object
-  return foundPerson[0];
+  return foundPerson;
 }
 
 // alerts a list of people
@@ -95,13 +94,21 @@ function displayPerson(person){
 
 /*======================================================================*/
 
-/* function displayFamily(people) {
-
-} */
-
-/* function displayDescendants(people) {
-
-} */
+function displayDescendants(person, people) {
+  let descendants = people.filter(function(list) {
+    if (person[0].id === list.parents[0] || person[0].id === list.parents[1]) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  let listDescendants = "";
+  for (let i = 0; i < descendants.length; i++) {
+    listDescendants += descendants[i].firstName + " " + descendants[i].lastName + "\n";
+  }
+  alert("The following are all descendants of " + person[0].firstName + " " + person[0].lastName + ":" + "\n" + listDescendants);
+}
 
 /*======================================================================*/
 
