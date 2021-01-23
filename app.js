@@ -113,7 +113,12 @@ function displayDescendants(person, people, counter) {
   if (counter < people.length) {
     return displayDescendants(person, people, counter + 1);
   }
+  if (listDescendants.length >= 1) {
   alert("The following are all descendants:" + "\n" + listDescendants);
+  }
+  else {
+    alert("No descendants were found.")
+  }
 }
 
 //function to calculate age
