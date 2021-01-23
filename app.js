@@ -56,12 +56,22 @@ function mainMenu(person, people){
   }
 }
 
+// function to capitalize the first letter of each name (titlecase)
+function titleCase (str) {
+  str = str.toLowerCase().split(" ");
+  for (let i = 0; i < str.length; i++) {
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+  }
+  return str.join(" ");
+}
+
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
 
   let foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.firstName === titleCase(firstName) && person.lastName === titleCase(lastName)){
       return true;
     }
     else{
