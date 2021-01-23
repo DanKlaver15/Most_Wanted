@@ -19,7 +19,7 @@ function app(people){
     app(people); // restart app
       break;
   }
-  
+
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
@@ -41,10 +41,10 @@ function mainMenu(person, people){
       displayPerson(person);
     break;
     case "family":
-      immediateFamily(person, people); 
+      immediateFamily(person, people,);
     break;
     case "descendants":
-      displayDescendants(person, people);
+      displayDescendants(person, people, 0);
     break;
     case "restart":
     app(people); // restart
@@ -88,31 +88,39 @@ function displayPerson(person){
   personInfo += "Weight: " + person[0].weight + "\n";
   personInfo += "Age: " + age + "\n";
   personInfo += "Eye Color: " + person[0].eyeColor + "\n";
-  personInfo += "Occupation: " + person[0].occupation + "\n"; 
+  personInfo += "Occupation: " + person[0].occupation + "\n";
   alert(personInfo);
 }
 
-function displayDescendants(person, people) {
-  let descendants = people.filter(function(list) {
-    if (person[0].id === list.parents[0] || person[0].id === list.parents[1]) {
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
-  let listDescendants = "";
-  for (let i = 0; i < descendants.length; i++) {
-    listDescendants += descendants[i].firstName + " " + descendants[i].lastName + "\n";
+//Function to find and dispay all descendants of the person searched for
+let listDescendants = [];
+function displayDescendants(person, people, counter) {
+  let descendants = [];
+  for (let i = 0; i < person.length; i++) { 
+    descendants = people.filter(function(list) {
+      if (person[i].id === list.parents[0] || person[i].id === list.parents[1]) {
+        return true;
+      }
+      else{
+        return false;
+      }
+    })
   }
-  alert("The following are all descendants of " + person[0].firstName + " " + person[0].lastName + ":" + "\n" + listDescendants);
+  for (let i = 0; i < descendants.length; i++) {
+    listDescendants.push(descendants[i].firstName + " " + descendants[i].lastName);
+  }
+  person = descendants;
+  if (counter < people.length) {
+    return displayDescendants(person, people, counter + 1);
+  }
+  alert("The following are all descendants:" + "\n" + listDescendants);
 }
 
 //function to calculate age
 function calculate_age(dob) {
-  let newDOB = Date.parse(dob); 
+  let newDOB = Date.parse(dob);
   let diff_ms = Date.now() - newDOB;
-  let age_dt = new Date(diff_ms); 
+  let age_dt = new Date(diff_ms);
 
   return Math.abs(age_dt.getUTCFullYear() - 1970);
 }
@@ -137,11 +145,11 @@ function chars(input){
 
 // function that checks for immediate family members - spouse/parents/siblings/children
 function immediateFamily(person, people){
-  
+
   //Iterate over every objects' id# to see if it matches the person's parent#
 
   function findParents(person, people){
-    let parentID = person[0].parents; 
+    let parentID = person[0].parents;
 
     let foundParent = people.filter(function(parentID){
         if(people[0] === parentID){
@@ -181,7 +189,7 @@ function immediateFamily(person, people){
       }
   })
 
-    return foundSpouse; 
+    return foundSpouse;
   }
 
   //Iterate over every objects' parent# to see if it matches the person's id#
@@ -196,7 +204,7 @@ function immediateFamily(person, people){
         return false;
       }
   })
-    return foundChildren; 
+    return foundChildren;
   }
 
   //A function to call all the above functions
@@ -208,7 +216,7 @@ function immediateFamily(person, people){
     let printChildren = findChildren(person, people);
 
     let familyAlert = alert("Parents: " + printParents + "\nSiblings: " + printSiblings + "\nSpouse: " + printSpouse + "\nChildern: " + printChildren);
-    
+
   }
 
   //Now call everything
