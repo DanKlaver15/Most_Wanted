@@ -120,11 +120,17 @@ function displayDescendants(person, people, counter) {
     listDescendants.push(descendants[i].firstName + " " + descendants[i].lastName);
   }
   person = descendants;
-  if (counter < people.length) {
+  if (counter < people.length && person.length >= 1) {
     return displayDescendants(person, people, counter + 1);
   }
   if (listDescendants.length >= 1) {
-  alert("The following are all descendants:" + "\n" + listDescendants);
+    let verticalList = "";
+    for (let i = 0; i < listDescendants.length; i++) {
+      verticalList += listDescendants[i] + "\n";
+    }
+      alert("The following are all descendants:" + "\n" + verticalList);
+      verticalList = "";
+      listDescendants = []
   }
   else {
     alert("No descendants were found.")
