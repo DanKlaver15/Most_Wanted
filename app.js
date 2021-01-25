@@ -106,7 +106,7 @@ function displayPerson(person){
 let listDescendants = [];
 function displayDescendants(person, people, counter) {
   let descendants = [];
-  for (let i = 0; i < person.length; i++) { 
+  for (let i = 0; i < person.length; i++) { //Loop through whoever is in the "person" array to find anyone in the dataset who's ID matches either of the IDs in the "parents" array and returns a new array "descendants"
     descendants = people.filter(function(list) {
       if (person[i].id === list.parents[0] || person[i].id === list.parents[1]) {
         return true;
@@ -116,20 +116,20 @@ function displayDescendants(person, people, counter) {
       }
     })
   }
-  for (let i = 0; i < descendants.length; i++) {
+  for (let i = 0; i < descendants.length; i++) { //Loop through anyone that was added to the descendants array and push those values to a new array of listDescendants"
     listDescendants.push(descendants[i].firstName + " " + descendants[i].lastName);
   }
-  person = descendants;
-  if (counter < people.length && person.length >= 1) {
+  person = descendants; //Feed the values from descendants into person to overwrite the original values to when the function is called again, it begins by searching for children of the children found in the beginning of the function
+  if (counter < people.length && person.length >= 1) { //Using recursion, reiterate through the entire dataset with the function to find all descendants
     return displayDescendants(person, people, counter + 1);
   }
-  if (listDescendants.length >= 1) {
+  if (listDescendants.length >= 1) { //Displays all the descendants in a vertical list with a new person for each row to make it easier for the user to read
     let verticalList = "";
     for (let i = 0; i < listDescendants.length; i++) {
       verticalList += listDescendants[i] + "\n";
     }
-      alert("The following are all descendants:" + "\n" + verticalList);
-      verticalList = "";
+      alert("The following are all descendants:" + "\n" + verticalList); //Display the vertical list of descencdants found
+      verticalList = ""; //These values need to be "reset" to empty so if the person does another search, it doesn't add the results from a previous search to the new search results
       listDescendants = []
   }
   else {
