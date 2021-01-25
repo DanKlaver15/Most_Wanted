@@ -96,7 +96,7 @@ function displayPerson(person){
 let listDescendants = [];
 function displayDescendants(person, people, counter) {
   let descendants = [];
-  for (let i = 0; i < person.length; i++) { //Loop through whoever is in the "person" array to find anyone in the dataset who's ID matches either of the IDs in the "parents" array and returns a new array "descendants"
+  for (let i = 0; i < person.length; i++) { //Loop through whoever is in the "people" array to find anyone in the dataset who's ID matches either of the IDs in the "parents" array and returns a new array "descendants"
     descendants = people.filter(function(list) {
       if (person[i].id === list.parents[0] || person[i].id === list.parents[1]) {
         return true;
