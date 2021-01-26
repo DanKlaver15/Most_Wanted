@@ -59,11 +59,11 @@ function mainMenu(person, people){
 /*======================================================================*/
 //function to search traits
 function searchByTraits(people){
-  let chosenTraits = promptFor("Please choose which traits you would like to search for leaving one space between each trait (i.e.) gender height weight eyecolor occupation)");//Prompt to choose which traits to search for
+  let chosenTraits = promptTraits("Please choose at least 2 traits you would like to search for leaving one space between each trait (i.e. 'gender height weight eyecolor occupation')");//Prompt to choose which traits to search for
   let chosenTraitsArr = chosenTraits.split(" ");//Turn resulting string to array
- 
-  for (let i = 0; i < chosenTraitsArr; i++) { //Iterate though the array to determine which traits were chosen
-   if (chosenTraitsArr[i].toLowerCase() === "gender")
+
+  /* for (let i = 0; i < chosenTraitsArr; i++) { //Iterate though the array to determine which traits were chosen
+   if (chosenTraitsArr[i].toLowerCase() === "gender") {
      //decide how/what to return
   }
    if (chosenTraitsArr[i].toLowerCase() === "height") {
@@ -79,7 +79,8 @@ function searchByTraits(people){
  }
  alert(these are the people)
  //Display the users that were found
- //Optional: develop a validation function to make sure the user enters the traits correctly
+ //Optional: develop a validation function to make sure the user enters the traits correctly */
+}
  /*======================================================================*/
 
 function searchByName(people){
@@ -178,6 +179,34 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+// helper function to prompt and validate the input from the user when choosing which traits to use for search
+function promptTraits (input) {
+    var response = prompt(input).trim().toLowerCase();
+    var responseArr = response.split(" ");
+    let valid = "";
+    if (responseArr.length > 1) {
+      for (let i = 0; i < responseArr.length; i++) {
+        if (responseArr[i] === "gender" || responseArr[i] === "height" || responseArr[i] === "weight" || responseArr[i] === "eyecolor" || responseArr[i] === "occupation") {
+          valid = true;
+        }
+        else {
+          valid = false;
+        }
+      }
+      if (valid === false) {
+        alert("Your response was invalid. Please choose which traits you would like to search for leaving one space between each trait (i.e.) gender height weight eyecolor occupation");
+        return promptTraits(input);
+      }
+      else {
+        return response;
+      }
+    }
+    else {
+      alert("Your response was invalid. Please choose at least 2 traits you would like to search for leaving one space between each trait (i.e. 'gender height weight eyecolor occupation')");
+      return promptTraits(input);
+    }
 }
 
 // function that checks for immediate family members - spouse/parents/siblings/children
