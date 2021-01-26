@@ -13,7 +13,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -55,6 +55,32 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
+
+/*======================================================================*/
+//function to search traits
+function searchByTraits(people){
+  let chosenTraits = promptFor("Please choose which traits you would like to search for leaving one space between each trait (i.e.) gender height weight eyecolor occupation)");//Prompt to choose which traits to search for
+  let chosenTraitsArr = chosenTraits.split(" ");//Turn resulting string to array
+ 
+  for (let i = 0; i < chosenTraitsArr; i++) { //Iterate though the array to determine which traits were chosen
+   if (chosenTraitsArr[i].toLowerCase() === "gender")
+     //decide how/what to return
+  }
+   if (chosenTraitsArr[i].toLowerCase() === "height") {
+     //decide how/what to return
+   }
+ 
+ 
+ //Display a prompt for each trait chosen so the user can enter a value
+ 
+ 
+ let foundTraits = people.filter(function(person){ //Run .filter() method through the dataset to find users with those traits
+   if(person.personTrait ==)
+ }
+ alert(these are the people)
+ //Display the users that were found
+ //Optional: develop a validation function to make sure the user enters the traits correctly
+ /*======================================================================*/
 
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
