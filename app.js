@@ -13,7 +13,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -29,7 +29,7 @@ function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  if(!person){
+  if(person.length < 1) {
     alert("Could not find that individual.");
     return app(people); // restart
   }
@@ -56,22 +56,38 @@ function mainMenu(person, people){
   }
 }
 
-// function to capitalize the first letter of each name (titlecase)
-function titleCase (str) {
-  str = str.toLowerCase().split(" ");
-  for (let i = 0; i < str.length; i++) {
-      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+/*======================================================================*/
+//function to search traits
+function searchByTraits(people){
+  let chosenTraits = promptFor("Please choose which traits you would like to search for leaving one space between each trait (i.e.) gender height weight eyecolor occupation)");//Prompt to choose which traits to search for
+  let chosenTraitsArr = chosenTraits.split(" ");//Turn resulting string to array
+ 
+  for (let i = 0; i < chosenTraitsArr; i++) { //Iterate though the array to determine which traits were chosen
+   if (chosenTraitsArr[i].toLowerCase() === "gender")
+     //decide how/what to return
   }
-  return str.join(" ");
-}
-
+   if (chosenTraitsArr[i].toLowerCase() === "height") {
+     //decide how/what to return
+   }
+ 
+ 
+ //Display a prompt for each trait chosen so the user can enter a value
+ 
+ 
+ let foundTraits = people.filter(function(person){ //Run .filter() method through the dataset to find users with those traits
+   if(person.personTrait ==)
+ }
+ alert(these are the people)
+ //Display the users that were found
+ //Optional: develop a validation function to make sure the user enters the traits correctly
+ /*======================================================================*/
 
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
 
   let foundPerson = people.filter(function(person){
-    if(person.firstName === titleCase(firstName) && person.lastName === titleCase(lastName)){
+    if(person.firstName.toLowerCase() === firstName.toLowerCase() && person.lastName.toLowerCase() === lastName.toLowerCase()){
       return true;
     }
     else{
@@ -106,7 +122,7 @@ function displayPerson(person){
 let listDescendants = [];
 function displayDescendants(person, people, counter) {
   let descendants = [];
-  for (let i = 0; i < person.length; i++) { 
+  for (let i = 0; i < person.length; i++) { //Loop through whoever is in the "people" array to find anyone in the dataset who's ID matches either of the IDs in the "parents" array and returns a new array "descendants"
     descendants = people.filter(function(list) {
       if (person[i].id === list.parents[0] || person[i].id === list.parents[1]) {
         return true;
@@ -116,15 +132,21 @@ function displayDescendants(person, people, counter) {
       }
     })
   }
-  for (let i = 0; i < descendants.length; i++) {
+  for (let i = 0; i < descendants.length; i++) { //Loop through anyone that was added to the descendants array and push those values to a new array of listDescendants"
     listDescendants.push(descendants[i].firstName + " " + descendants[i].lastName);
   }
-  person = descendants;
-  if (counter < people.length) {
+  person = descendants; //Feed the values from descendants into person to overwrite the original values to when the function is called again, it begins by searching for children of the children found in the beginning of the function
+  if (counter < people.length && person.length >= 1) { //Using recursion, reiterate through the entire dataset with the function to find all descendants
     return displayDescendants(person, people, counter + 1);
   }
-  if (listDescendants.length >= 1) {
-  alert("The following are all descendants:" + "\n" + listDescendants);
+  if (listDescendants.length >= 1) { //Displays all the descendants in a vertical list with a new person for each row to make it easier for the user to read
+    let verticalList = "";
+    for (let i = 0; i < listDescendants.length; i++) {
+      verticalList += listDescendants[i] + "\n";
+    }
+      alert("The following are all descendants:" + "\n" + verticalList); //Display the vertical list of descencdants found
+      verticalList = ""; //These values need to be "reset" to empty so if the person does another search, it doesn't add the results from a previous search to the new search results
+      listDescendants = []
   }
   else {
     alert("No descendants were found.")
