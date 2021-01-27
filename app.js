@@ -65,7 +65,7 @@ function searchByTraits(people){
 
   for (let i = 0; i < chosenTraitsArr.length; i++) { //Iterate though the array to determine which traits were chosen
     if (chosenTraitsArr[i].toLowerCase() === "gender") {
-      traitValuesArr.push(prompt("Gender Search:" + "\n" + "Please enter either male or female.").toLowerCase());
+      traitValuesArr.push(promptGender("Gender Search:" + "\n" + "Please enter either male or female.").toLowerCase());
       // genderValue = prompt("Gender Search:" + "\n" + "Please enter either male or female.").toLowerCase();
     }
     else if (chosenTraitsArr[i] === "height") {
@@ -334,6 +334,24 @@ function promptTraits (input) {
       alert("Your response was invalid. Please choose at least 2 traits you would like to search for leaving one space between each trait (i.e. 'gender height weight eyecolor occupation')");
       return promptTraits(input);
     }
+}
+
+function promptGender (input) {
+  let response = prompt(input).trim().toLowerCase();
+  let valid;
+  if (response === "male" || response === "female") {
+    valid = true;
+  }
+  else {
+    valid = false;
+  }
+  if (valid === false) {
+    alert("Your response was invalid. Please choose either 'male' or 'female'.");
+    return promptGender(input);
+  }
+  else {
+    return response;
+  }
 }
 
 // function that checks for immediate family members - spouse/parents/siblings/children
