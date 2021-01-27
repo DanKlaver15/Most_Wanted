@@ -77,11 +77,11 @@ function searchByTraits(people){
       // weightValue = prompt("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation.");
     }
      else if (chosenTraitsArr[i].toLowerCase() === "eyecolor") {
-      traitValuesArr.push(prompt("Eye Color Search:" + "\n" + "Please enter a color.").toLowerCase());
+      traitValuesArr.push(promptFor("Eye Color Search:" + "\n" + "Please enter a color.").toLowerCase());
       // eyeColorValue = prompt("Eye Color Search:" + "\n" + "Please enter a color.").toLowerCase();
     }
     else if (chosenTraitsArr[i].toLowerCase() === "occupation") {
-      traitValuesArr.push(prompt("Occupation Search:" + "\n" + "Please enter an occupation.").toLowerCase());
+      traitValuesArr.push(promptFor("Occupation Search:" + "\n" + "Please enter an occupation.").toLowerCase());
       // occupationValue = prompt("Occupation Search:" + "\n" + "Please enter an occupation.").toLowerCase();
     }
   }
