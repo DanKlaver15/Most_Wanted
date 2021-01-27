@@ -69,11 +69,11 @@ function searchByTraits(people){
       // genderValue = prompt("Gender Search:" + "\n" + "Please enter either male or female.").toLowerCase();
     }
     else if (chosenTraitsArr[i] === "height") {
-      traitValuesArr.push(parseInt(prompt("Height Search:" + "\n" + "Please enter an integer for height in inches without any punctuation.")));
+      traitValuesArr.push(parseInt(promptHeightWeight("Height Search:" + "\n" + "Please enter an integer for height in inches without any punctuation.")));
       // heightValue = prompt("Height Search:" + "\n" + "Please enter an integer for height in inches without any punctuation.");
     }
     else if (chosenTraitsArr[i] === "weight") {
-      traitValuesArr.push(parseInt(prompt("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation.")));
+      traitValuesArr.push(parseInt(promptHeightWeight("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation.")));
       // weightValue = prompt("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation.");
     }
      else if (chosenTraitsArr[i].toLowerCase() === "eyecolor") {
@@ -348,6 +348,25 @@ function promptGender (input) {
   if (valid === false) {
     alert("Your response was invalid. Please choose either 'male' or 'female'.");
     return promptGender(input);
+  }
+  else {
+    return response;
+  }
+}
+
+function promptHeightWeight (input) {
+  let response = prompt(input).trim().toLowerCase();
+  let valid;
+  let regex = new RegExp(/\b(\d)+\b/);
+  if (regex.test(response)) {
+    valid = true;
+  }
+  else {
+    valid = false;
+  }
+  if (valid === false) {
+    alert("Your response was invalid. Please choose an integer.");
+    return promptHeightWeight(input);
   }
   else {
     return response;
