@@ -59,28 +59,157 @@ function mainMenu(person, people){
 /*======================================================================*/
 //function to search traits
 function searchByTraits(people){
-  let chosenTraits = promptTraits("Please choose at least 2 traits you would like to search for leaving one space between each trait (i.e. 'gender height weight eyecolor occupation')");//Prompt to choose which traits to search for
+  let chosenTraits = promptTraits("Please choose at least 2 traits you would like to search for leaving one space between each trait. For example: gender height weight eyecolor occupation");//Prompt to choose which traits to search for
   let chosenTraitsArr = chosenTraits.split(" ");//Turn resulting string to array
+  let traitValuesArr = [];
 
-  /* for (let i = 0; i < chosenTraitsArr; i++) { //Iterate though the array to determine which traits were chosen
-   if (chosenTraitsArr[i].toLowerCase() === "gender") {
-     //decide how/what to return
+  for (let i = 0; i < chosenTraitsArr.length; i++) { //Iterate though the array to determine which traits were chosen
+    if (chosenTraitsArr[i].toLowerCase() === "gender") {
+      traitValuesArr.push(prompt("Gender Search:" + "\n" + "Please enter either male or female.").toLowerCase());
+      // genderValue = prompt("Gender Search:" + "\n" + "Please enter either male or female.").toLowerCase();
+    }
+    else if (chosenTraitsArr[i].toLowerCase() === "height") {
+      traitValuesArr.push(prompt("Height Search:" + "\n" + "Please enter an integer for height in inches without any punctuation."));
+      // heightValue = prompt("Height Search:" + "\n" + "Please enter an integer for height in inches without any punctuation.");
+    }
+    else if (chosenTraitsArr[i].toLowerCase() === "weight") {
+      traitValuesArr.push(prompt("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation."));
+      // weightValue = prompt("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation.");
+    }
+     else if (chosenTraitsArr[i].toLowerCase() === "eyecolor") {
+      traitValuesArr.push(prompt("Eye Color Search:" + "\n" + "Please enter a color.").toLowerCase());
+      // eyeColorValue = prompt("Eye Color Search:" + "\n" + "Please enter a color.").toLowerCase();
+    }
+    else if (chosenTraitsArr[i].toLowerCase() === "occupation") {
+      traitValuesArr.push(prompt("Occupation Search:" + "\n" + "Please enter an occupation.").toLowerCase());
+      // occupationValue = prompt("Occupation Search:" + "\n" + "Please enter an occupation.").toLowerCase();
+    }
   }
-   if (chosenTraitsArr[i].toLowerCase() === "height") {
-     //decide how/what to return
+
+  let searchResults = [];
+  let gender = [];
+  for (let i = 0; i < chosenTraitsArr.length; i++){
+    if (chosenTraitsArr[i] === "gender") {
+      gender = people.filter(function(list) {
+        if (list.gender === traitValuesArr[i]) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      })
+    }
+  }
+  let height = [];
+  for (let i = 0; i < chosenTraitsArr.length; i++){
+    if (chosenTraitsArr[i] === "height") {
+      height = people.filter(function(list) {
+        if (list.height === traitValuesArr[i]) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      })
+    }
+  }
+  let weight = [];
+  for (let i = 0; i < chosenTraitsArr.length; i++){
+    if (chosenTraitsArr[i] === "weight") {
+      weight = people.filter(function(list) {
+        if (list.weight === traitValuesArr[i]) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      })
+    }
+  }
+  let eyecolor = [];
+  for (let i = 0; i < chosenTraitsArr.length; i++){
+    if (chosenTraitsArr[i] === "eyecolor") {
+      eyecolor = people.filter(function(list) {
+        if (list.eyeColor === traitValuesArr[i]) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      })
+    }
+  }
+  let occupation = [];
+  for (let i = 0; i < chosenTraitsArr.length; i++){
+    if (chosenTraitsArr[i] === "occupation") {
+      occupation = people.filter(function(list) {
+        if (list.occupation === traitValuesArr[i]) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      })
+    }
+  }
+
+  if (gender.length > 0) {
+    for (let i = 0; i < gender.length; i++)
+    searchResults.push(gender[i].firstName + " " + gender[i].lastName )
+  }
+  if (height.length > 0) {
+    for (let i = 0; i < height.length; i++)
+    searchResults.push(height[i].firstName + " " + height[i].lastName )
+  }
+  if (weight.length > 0) {
+    for (let i = 0; i < weight.length; i++)
+    searchResults.push(weight[i].firstName + " " + weight[i].lastName )
+  }
+  if (eyecolor.length > 0) {
+    for (let i = 0; i < eyecolor.length; i++)
+    searchResults.push(eyecolor[i].firstName + " " + eyecolor[i].lastName )
+  }
+  if (occupation.length > 0) {
+    for (let i = 0; i < occupation.length; i++)
+    searchResults.push(occupation[i].firstName + " " + occupation[i].lastName )
+  }
+
+  function count_duplicate(list){
+    let counts = {}
+   
+    for(let i =0; i < list.length; i++){ 
+        if (counts[list[i]]){
+        counts[list[i]] += 1
+        } else {
+        counts[list[i]] = 1
+        }
+       }  
+       for (let prop in counts){
+           if (counts[prop] = chosenTraitsArr.length){
+               console.log(prop + " counted: " + counts[prop] + " times.")
+           }
+       }
+     console.log(counts)
    }
- 
- 
- //Display a prompt for each trait chosen so the user can enter a value
- 
- 
- let foundTraits = people.filter(function(person){ //Run .filter() method through the dataset to find users with those traits
-   if(person.personTrait ==)
- }
- alert(these are the people)
- //Display the users that were found
- //Optional: develop a validation function to make sure the user enters the traits correctly */
+   
+   count_duplicate(searchResults)
+
+
+/*   let traitsObj = {};
+  chosenTraitsArr.forEach((key, i) => traitsObj[key] = traitValuesArr[i]); */
+
+/*   let matchingPeople = [];
+  function filterForTraits(people, filterObject) {
+    for (let key in filterObject) {
+      matchingPeople = people.filter((list) => list[key] === filterObject[key]);
+    }
+    return matchingPeople;
+  } */
+
+/*   filterForTraits(people, traitsObj);
+  console.log(matchingPeople); */
 }
+
  /*======================================================================*/
 
 function searchByName(people){
