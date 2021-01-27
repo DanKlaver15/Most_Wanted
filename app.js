@@ -189,13 +189,24 @@ function searchByTraits(people){
            result.push(prop);
        }
     }
-    return result;
+    if (result.length >= 1) {
+      let verticalList = "";
+      if (result.length >= 1) { //Displays all the results in a vertical list with a new person for each row to make it easier for the user to read
+        for (let i = 0; i < result.length; i++) {
+          verticalList += result[i] + "\n";
+        }
+      }
+      else {
+        verticalList = "Sorry. No one was found that meets that criteria."
+      }
+      return verticalList;
+    }
   }
 
-  alert("The following people met your search criteria: " + findRepeats(searchResults));
+  alert("The following people met your search criteria: " + "\n" + findRepeats(searchResults));
+  return app(people);
 
 }
-
 
  /*======================================================================*/
 
