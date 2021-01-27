@@ -59,7 +59,7 @@ function mainMenu(person, people){
 /*======================================================================*/
 //function to search traits
 function searchByTraits(people){
-  let chosenTraits = promptTraits("Please choose at least 2 traits you would like to search for leaving one space between each trait. For example: gender height weight eyecolor occupation");//Prompt to choose which traits to search for
+  let chosenTraits = promptTraits("Please choose the traits for which you would like to search, leaving one space between each trait. For example: gender height weight eyecolor occupation");//Prompt to choose which traits to search for
   let chosenTraitsArr = chosenTraits.split(" ");//Turn resulting string to array
   let traitValuesArr = [];
 
@@ -68,12 +68,12 @@ function searchByTraits(people){
       traitValuesArr.push(prompt("Gender Search:" + "\n" + "Please enter either male or female.").toLowerCase());
       // genderValue = prompt("Gender Search:" + "\n" + "Please enter either male or female.").toLowerCase();
     }
-    else if (chosenTraitsArr[i].toLowerCase() === "height") {
-      traitValuesArr.push(prompt("Height Search:" + "\n" + "Please enter an integer for height in inches without any punctuation."));
+    else if (chosenTraitsArr[i] === "height") {
+      traitValuesArr.push(parseInt(prompt("Height Search:" + "\n" + "Please enter an integer for height in inches without any punctuation.")));
       // heightValue = prompt("Height Search:" + "\n" + "Please enter an integer for height in inches without any punctuation.");
     }
-    else if (chosenTraitsArr[i].toLowerCase() === "weight") {
-      traitValuesArr.push(prompt("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation."));
+    else if (chosenTraitsArr[i] === "weight") {
+      traitValuesArr.push(parseInt(prompt("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation.")));
       // weightValue = prompt("Weight Search:" + "\n" + "Please enter an integer for weight in pounds without any punctuation.");
     }
      else if (chosenTraitsArr[i].toLowerCase() === "eyecolor") {
@@ -174,41 +174,28 @@ function searchByTraits(people){
     searchResults.push(occupation[i].firstName + " " + occupation[i].lastName )
   }
 
-  function count_duplicate(list){
-    let counts = {}
-   
-    for(let i =0; i < list.length; i++){ 
-        if (counts[list[i]]){
-        counts[list[i]] += 1
-        } else {
-        counts[list[i]] = 1
-        }
-       }  
-       for (let prop in counts){
-           if (counts[prop] = chosenTraitsArr.length){
-               console.log(prop + " counted: " + counts[prop] + " times.")
-           }
+  function findRepeats(arra1) {
+    var object = {};
+    var result = [];
+
+    arra1.forEach(function (item) {
+      if(!object[item])
+          object[item] = 0;
+        object[item] += 1;
+    })
+
+    for (var prop in object) {
+       if(object[prop] >= chosenTraitsArr.length) {
+           result.push(prop);
        }
-     console.log(counts)
-   }
-   
-   count_duplicate(searchResults)
-
-
-/*   let traitsObj = {};
-  chosenTraitsArr.forEach((key, i) => traitsObj[key] = traitValuesArr[i]); */
-
-/*   let matchingPeople = [];
-  function filterForTraits(people, filterObject) {
-    for (let key in filterObject) {
-      matchingPeople = people.filter((list) => list[key] === filterObject[key]);
     }
-    return matchingPeople;
-  } */
+    return result;
+  }
 
-/*   filterForTraits(people, traitsObj);
-  console.log(matchingPeople); */
+  alert("The following people met your search criteria: " + findRepeats(searchResults));
+
 }
+
 
  /*======================================================================*/
 
